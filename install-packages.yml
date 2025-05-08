@@ -1,0 +1,14 @@
+- name: install packages in east servers
+  hosts: east
+  become: yes
+  tasks:
+  - name: Update apt cache
+    apt:
+      update_cache: yes
+  - name: Install developer tools
+    apt:
+      name:
+        - git
+        - curl
+        - vim
+      state: present
