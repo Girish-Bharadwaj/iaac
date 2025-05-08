@@ -1,0 +1,31 @@
+- import_playbook: ../package-installer/install-packages-playbook.yml
+
+
+- name: Run curl scripts
+  hosts: east
+  become: false
+  vars_files:
+    - vars.yml
+
+  tasks:
+  - name: Create the destination directory
+    file:
+      path: /root/scripts
+      state: directory
+      mode: '0755'  # Permissions for the directory
+
+  - name: Copy script to remote host
+    copy:
+      src: script.sh
+      dest: ~/scripts/script.sh
+      mode: '0755'
+
+  - name: Run the curl script and capture output
+    shell: "/root/scripts/script.sh"
+    register: curl_output
+    args:
+      executable: /bin/bash
+
+  - name: Show curl command output
+    debug:
+      msg: "{{ curl_output.stdout }}"
