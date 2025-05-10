@@ -1,19 +1,9 @@
-- name: Update east servers
-  hosts: east
+- name: Ping servers
+  hosts: all
   tasks:
    - name: Ping my hosts
      ansible.builtin.ping:
 
    - name: Print message
      ansible.builtin.debug:
-       msg: Hello east
-
-- name: Update west server
-  hosts: west
-  tasks:
-   - name: Ping my hosts
-     ansible.builtin.ping:
-
-   - name: Print message
-     ansible.builtin.debug:
-       msg: Hello west
+       msg: Hello {{ inventory_hostname }}

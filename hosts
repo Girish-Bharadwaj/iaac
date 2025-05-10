@@ -5,7 +5,6 @@ container2 ansible_host=localhost ansible_port=2222
 [west]
 container3 ansible_host=localhost ansible_port=2223
 
-
 [servers:children]
 west
 east
@@ -14,3 +13,15 @@ east
 ansible_user=root
 ansible_ssh_pass=root
 ansible_ssh_common_args='-o StrictHostKeyChecking=no' 
+
+
+
+[gcpinstances]
+gcp_instance_n1 ansible_host=localhost # replace with actual IP address or hostname
+
+[redisinstances]
+gcp_instance_n1
+
+[gcpinstances:vars]
+ansible_user=girish
+ansible_ssh_private_key_file=~/.ssh/gcp

@@ -1,0 +1,41 @@
+---
+- name: Install Redis Server
+  hosts: redisinstances
+  become: true
+  tasks:
+    - name: Update apt cache (Debian/Ubuntu only)
+      apt:
+        update_cache: yes
+      when: ansible_os_family == 'Debian'
+
+    - name: Install Redis
+      apt:
+        name: redis-server
+        state: present
+      when: ansible_os_family == 'Debian'
+
+    - name: Enable and start Redis service
+      systemd:
+        name: redis-server
+        enabled: true
+        state: started
+
+    - name: Allow remote connections | Added firewall rule in GCP
+      lineinfile:
+        path: /etc/redis/redis.conf
+        regexp: '^bind '
+        line: 'bind 0.0.0.0'
+      notify: Restart Redis
+
+    - name: Disable protected-mode
+      lineinfile:
+        path: /etc/redis/redis.conf
+        regexp: '^protected-mode '
+        line: 'protected-mode no'
+      notify: Restart Redis
+
+  handlers:
+    - name: Restart Redis
+      systemd:
+        name: redis-server
+        state: restarted
