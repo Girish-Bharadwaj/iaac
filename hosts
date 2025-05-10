@@ -10,10 +10,9 @@ west
 east
 
 [servers:vars]
-ansible_user=root
-ansible_ssh_pass=root
+ansible_user=ansible
+ansible_ssh_pass=ansible
 ansible_ssh_common_args='-o StrictHostKeyChecking=no' 
-
 
 
 [gcpinstances]
