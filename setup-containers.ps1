@@ -1,3 +1,4 @@
+# Can simulate multiple hosts for Ansible using Docker containers.
 # Stop and remove existing containers
 docker stop ansible-host1 ansible-host2 ansible-host3
 docker rm ansible-host1 ansible-host2 ansible-host3
