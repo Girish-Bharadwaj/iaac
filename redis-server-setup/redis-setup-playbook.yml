@@ -20,7 +20,7 @@
         enabled: true
         state: started
 
-    - name: Allow remote connections | Added firewall rule in GCP
+    - name: Allow remote connections
       lineinfile:
         path: /etc/redis/redis.conf
         regexp: '^bind '
