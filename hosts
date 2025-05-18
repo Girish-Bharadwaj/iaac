@@ -16,13 +16,20 @@ ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 
 
 [gcpinstances]
-gcp_instance_n1 ansible_host=34.10.66.18 # replace with actual IP address or hostname
+gcp_instance_n1 ansible_host=replace-with-ip
 
 [azure]
-azure_instance_1 ansible_host=4.242.18.34
+azure_instance_1 ansible_host=replace-with-ip
+azure_instance_2 ansible_host=replace-with-ip
+
 
 [redisinstances]
 azure_instance_1
+azure_instance_2
+
+[webapp]
+azure_instance_1
+azure_instance_2
 
 [gcpinstances:vars]
 ansible_user=girish
@@ -31,4 +38,4 @@ ansible_ssh_private_key_file=~/.ssh/gcp
 
 [azure:vars]
 ansible_user=azureuser
-ansible_ssh_private_key_file=~/.ssh/VM1_key.pem
+ansible_ssh_private_key_file=~/.ssh/azure.pem

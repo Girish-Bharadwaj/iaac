@@ -1,0 +1,13 @@
+- name: Install yeasy/simple-web app
+  hosts: webapp
+  become: true
+
+  tasks:
+    - name: Run the container
+      docker_container:
+        name: simple-web
+        image: yeasy/simple-web
+        state: started
+        restart_policy: always
+        ports:
+          - "7095:80"
